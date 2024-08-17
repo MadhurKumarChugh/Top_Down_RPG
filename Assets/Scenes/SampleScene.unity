@@ -7723,6 +7723,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6.5
+  waitTime: 0.5
   movedirection: {x: 0, y: 0}
 --- !u!50 &989551037
 Rigidbody2D:
