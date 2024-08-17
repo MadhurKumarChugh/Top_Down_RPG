@@ -3,8 +3,8 @@
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
 #
 # file: ~/.gitignore_global
-.DS_Store
-.idea
+/.DS_Store/
+/.idea/
 
 /[Ll]ibrary/
 /[Tt]emp/
