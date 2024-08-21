@@ -6,13 +6,9 @@ public class PlayerMovement : MonoBehaviour
 {
     // Movement Speed of Player
     [SerializeField] float moveSpeed;
-    // A boolean to check we have contacted the NPC or not
-    bool isTouched;
-    // Waiting time before ShowMessage coroutine starts
-    [SerializeField] float waitTime = 2f;
     
     // A movement vector to store input from user
-    [SerializeField] Vector2 movedirection;
+    Vector2 movedirection;
     
     // Rigidbody object component of player
     Rigidbody2D playerBody;
@@ -29,43 +25,12 @@ public class PlayerMovement : MonoBehaviour
         //Processing Input
         ProcessInput();
         
-        // Checking if key is pressed after contacting NPC
-        if (Input.GetKey(KeyCode.Space) && isTouched)
-        {
-            // Started Show Message coroutine
-            StartCoroutine(Interact());
-        }
     }
 
     void FixedUpdate()
     {
         //Physics Calculations
         Move();
-    }
-
-    void OnCollisionEnter2D(Collision2D other)
-    {
-        // Checking if player has contacted NPC or not
-        if (other.gameObject.CompareTag("NPC"))
-        {
-            // If player has contacted NPC, isTouched is set to true
-            isTouched = true;
-        }
-    }
-    
-    IEnumerator Interact()
-    {
-        int count = 0;
-        // Debug.Log("Startrd");
-        // Started loop of coroutine if contacted NPC
-        // Can be changed to a for loop later on
-        while(isTouched)
-        {
-            // Waiting before next message is shown
-            yield return new WaitForSeconds(waitTime);
-            count++;
-            Debug.Log(count);
-        }
     }
     
     void ProcessInput()
