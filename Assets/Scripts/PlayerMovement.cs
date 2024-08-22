@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("PLAYER MOVEMENT")]
     // Movement Speed of Player
     [SerializeField] float moveSpeed;
     
     // A movement vector to store input from user
     Vector2 movedirection;
-    
     // Rigidbody object component of player
     Rigidbody2D playerBody;
     
@@ -38,6 +38,8 @@ public class PlayerMovement : MonoBehaviour
         // Getting input from user
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");
+        
+        Debug.Log(moveX);
         
         // *****OPTIONAL*****
         // Cancel diagonal movement
