@@ -8,6 +8,9 @@ public class PlayerMovement : MonoBehaviour
     private static readonly int WalkDown = Animator.StringToHash("walkDown");
     // isAttacking Parameter of Animator
     private static readonly int IsAttacking = Animator.StringToHash("isAttacking");
+    private static readonly int WalkRight = Animator.StringToHash("walkRight");
+    private static readonly int WalkUp = Animator.StringToHash("walkUp");
+    private static readonly int WalkLeft = Animator.StringToHash("walkLeft");
 
     [Header("PLAYER MOVEMENT")]
     // Movement Speed of Player
@@ -75,20 +78,22 @@ public class PlayerMovement : MonoBehaviour
     // Function to control all animations
     void AnimatePlayer(float x, float y)
     {
+        UpAnim(y);
         DownAnim(y);
+        RightAnim(x);
+        LeftAnim(x);
         AttackChecker();
     }
 
-    // Function to check if player is attacking or not
-    void AttackChecker()
+    void UpAnim(float y)
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (y.Equals(1))
         {
-            playerAnimator.SetBool(IsAttacking,true);
+            playerAnimator.SetBool(WalkUp, true);
         }
-        else if (Input.GetKeyUp(KeyCode.Space))
+        else if (y.Equals(0))
         {
-            playerAnimator.SetBool(IsAttacking,false);
+            playerAnimator.SetBool(WalkUp, false);
         }
     }
 
@@ -102,6 +107,43 @@ public class PlayerMovement : MonoBehaviour
         else if (y.Equals(0))
         {
             playerAnimator.SetBool(WalkDown, false);
+        }
+    }
+
+    void RightAnim(float x)
+    {
+        if (x.Equals(1))
+        {
+            playerAnimator.SetBool(WalkRight, true);
+        }
+        else if (x.Equals(0))
+        {
+            playerAnimator.SetBool(WalkRight, false);
+        }
+    }
+
+    void LeftAnim(float x)
+    {
+        if (x.Equals(-1))
+        {
+            playerAnimator.SetBool(WalkLeft, true);
+        }
+        else if (x.Equals(0))
+        {
+            playerAnimator.SetBool(WalkLeft, false);
+        }
+    }
+    
+    // Function to check if player is attacking or not
+    void AttackChecker()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            playerAnimator.SetBool(IsAttacking,true);
+        }
+        else if (Input.GetKeyUp(KeyCode.Space))
+        {
+            playerAnimator.SetBool(IsAttacking,false);
         }
     }
 
