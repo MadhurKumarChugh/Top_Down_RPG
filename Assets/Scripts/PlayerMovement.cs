@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, Interactable
 {
     // walkDown Parameter of Animator
     private static readonly int WalkDown = Animator.StringToHash("walkDown");
@@ -85,7 +85,12 @@ public class PlayerMovement : MonoBehaviour
         AttackChecker();
     }
 
-    void UpAnim(float y)
+    public void Interact()
+    {
+        
+    }
+
+    public void UpAnim(float y)
     {
         if (y.Equals(1))
         {
@@ -98,7 +103,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Function for WalkDown animation
-    void DownAnim(float y)
+    public void DownAnim(float y)
     {
         if (y.Equals(-1))
         {
@@ -110,7 +115,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void RightAnim(float x)
+    public void RightAnim(float x)
     {
         if (x.Equals(1))
         {
@@ -122,7 +127,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void LeftAnim(float x)
+    public void LeftAnim(float x)
     {
         if (x.Equals(-1))
         {
@@ -135,7 +140,7 @@ public class PlayerMovement : MonoBehaviour
     }
     
     // Function to check if player is attacking or not
-    void AttackChecker()
+    public void AttackChecker()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {

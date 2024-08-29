@@ -57,4 +57,29 @@ public class NPCController : MonoBehaviour, Interactable
         // Started Show Message coroutine
         StartCoroutine(Interacting());
     }
+
+    public void UpAnim(float y)
+    {
+        
+    }
+
+    public void DownAnim(float y)
+    {
+        
+    }
+
+    public void RightAnim(float x)
+    {
+        
+    }
+
+    public void LeftAnim(float x)
+    {
+        
+    }
+
+    public void AttackChecker()
+    {
+        
+    }
 }
