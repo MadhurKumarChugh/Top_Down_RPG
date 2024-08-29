@@ -39,8 +39,6 @@ public class PlayerMovement : MonoBehaviour
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");
         
-        Debug.Log(moveX);
-        
         // *****OPTIONAL*****
         // Cancel diagonal movement
         if (moveX != 0)
