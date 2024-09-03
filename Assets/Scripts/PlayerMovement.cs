@@ -2,15 +2,11 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour, Interactable
+public class PlayerMovement : MonoBehaviour
 {
-    // walkDown Parameter of Animator
-    private static readonly int WalkDown = Animator.StringToHash("walkDown");
-    // isAttacking Parameter of Animator
-    private static readonly int IsAttacking = Animator.StringToHash("isAttacking");
-    private static readonly int WalkRight = Animator.StringToHash("walkRight");
-    private static readonly int WalkUp = Animator.StringToHash("walkUp");
-    private static readonly int WalkLeft = Animator.StringToHash("walkLeft");
+    const string PLAYER_DOWN_IDLE = "player_down_idle";
+    const string PLAYER_WALK_DOWN = "player_walk_down";
+    const string WALK_UP = "walk_up";
 
     [Header("PLAYER MOVEMENT")]
     // Movement Speed of Player
@@ -22,6 +18,7 @@ public class PlayerMovement : MonoBehaviour, Interactable
     Rigidbody2D playerBody;
     // Animator to control player animation by code
     Animator playerAnimator;
+    private String currentState = PLAYER_DOWN_IDLE;
     
     void Awake()
     {
@@ -58,7 +55,9 @@ public class PlayerMovement : MonoBehaviour, Interactable
             moveY = 0;
         }
         
-        AnimatePlayer(moveX, moveY);
+        if(moveY.Equals(1)) {AnimatePlayer(WALK_UP);}
+        else if(moveY.Equals(-1)) {AnimatePlayer(PLAYER_WALK_DOWN);}
+        else AnimatePlayer(PLAYER_DOWN_IDLE);
         
         
         // Storing the input in movedirection vector
@@ -76,81 +75,16 @@ public class PlayerMovement : MonoBehaviour, Interactable
     }
     
     // Function to control all animations
-    void AnimatePlayer(float x, float y)
+    public void AnimatePlayer(string newState)
     {
-        UpAnim(y);
-        DownAnim(y);
-        RightAnim(x);
-        LeftAnim(x);
-        AttackChecker();
-    }
-
-    public void Interact()
-    {
+        if (currentState == newState) return;
         
+        playerAnimator.Play(newState);
+        
+        currentState = newState;
     }
 
-    public void UpAnim(float y)
-    {
-        if (y.Equals(1))
-        {
-            playerAnimator.SetBool(WalkUp, true);
-        }
-        else if (y.Equals(0))
-        {
-            playerAnimator.SetBool(WalkUp, false);
-        }
-    }
-
-    // Function for WalkDown animation
-    public void DownAnim(float y)
-    {
-        if (y.Equals(-1))
-        {
-            playerAnimator.SetBool(WalkDown, true);
-        }
-        else if (y.Equals(0))
-        {
-            playerAnimator.SetBool(WalkDown, false);
-        }
-    }
-
-    public void RightAnim(float x)
-    {
-        if (x.Equals(1))
-        {
-            playerAnimator.SetBool(WalkRight, true);
-        }
-        else if (x.Equals(0))
-        {
-            playerAnimator.SetBool(WalkRight, false);
-        }
-    }
-
-    public void LeftAnim(float x)
-    {
-        if (x.Equals(-1))
-        {
-            playerAnimator.SetBool(WalkLeft, true);
-        }
-        else if (x.Equals(0))
-        {
-            playerAnimator.SetBool(WalkLeft, false);
-        }
-    }
     
-    // Function to check if player is attacking or not
-    public void AttackChecker()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            playerAnimator.SetBool(IsAttacking,true);
-        }
-        else if (Input.GetKeyUp(KeyCode.Space))
-        {
-            playerAnimator.SetBool(IsAttacking,false);
-        }
-    }
 
     // void Interact(float movX = 0, float movY = 0)
     // {
