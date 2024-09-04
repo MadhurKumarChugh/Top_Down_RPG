@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    const string PLAYER_DOWN_IDLE = "player_down_idle";
-    const string PLAYER_WALK_DOWN = "player_walk_down";
-    const string WALK_UP = "walk_up";
-
     [Header("PLAYER MOVEMENT")]
     // Movement Speed of Player
     [SerializeField] float moveSpeed;
@@ -16,16 +12,15 @@ public class PlayerMovement : MonoBehaviour
     Vector2 movedirection;
     // Rigidbody object component of player
     Rigidbody2D playerBody;
-    // Animator to control player animation by code
-    Animator playerAnimator;
-    private String currentState = PLAYER_DOWN_IDLE;
+    // Animation Controller Script component of player
+    AnimationController animationController;
     
     void Awake()
     {
         // Getting the Rigidbody2D component of the player
         playerBody = GetComponent<Rigidbody2D>();
-        // Getting the Animator component of the player
-        playerAnimator = GetComponent<Animator>();
+        // Getting the Animator Controller Script component of the player
+        animationController = GetComponent<AnimationController>();
     }
 
     // Update is called once per frame
@@ -55,9 +50,8 @@ public class PlayerMovement : MonoBehaviour
             moveY = 0;
         }
         
-        if(moveY.Equals(1)) {AnimatePlayer(WALK_UP);}
-        else if(moveY.Equals(-1)) {AnimatePlayer(PLAYER_WALK_DOWN);}
-        else AnimatePlayer(PLAYER_DOWN_IDLE);
+        // Calling AnimatePlayer Function of Animation Controller Script
+        animationController.AnimatePlayer(moveX, moveY);
         
         
         // Storing the input in movedirection vector
@@ -72,16 +66,6 @@ public class PlayerMovement : MonoBehaviour
     {
         // Using velocity to move player
         playerBody.velocity = new Vector2(movedirection.x * moveSpeed, movedirection.y * moveSpeed);
-    }
-    
-    // Function to control all animations
-    public void AnimatePlayer(string newState)
-    {
-        if (currentState == newState) return;
-        
-        playerAnimator.Play(newState);
-        
-        currentState = newState;
     }
 
     
