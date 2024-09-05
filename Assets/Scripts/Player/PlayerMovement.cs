@@ -13,14 +13,14 @@ public class PlayerMovement : MonoBehaviour
     // Rigidbody object component of player
     Rigidbody2D playerBody;
     // Animation Controller Script component of player
-    AnimationController animationController;
+    PanimationController animationController;
     
     void Awake()
     {
         // Getting the Rigidbody2D component of the player
         playerBody = GetComponent<Rigidbody2D>();
         // Getting the Animator Controller Script component of the player
-        animationController = GetComponent<AnimationController>();
+        animationController = GetComponent<PanimationController>();
     }
 
     // Update is called once per frame
@@ -52,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
         
         // Calling AnimatePlayer Function of Animation Controller Script
         animationController.AnimatePlayer(moveX, moveY);
+        animationController.AttackCheck(moveX, moveY);
         
         
         // Storing the input in movedirection vector
