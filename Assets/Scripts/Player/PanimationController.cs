@@ -23,6 +23,7 @@ public class PanimationController : MonoBehaviour
         Animator playerAnimator;
         // String to store current animation that is playing
         String currentState = DOWN_IDLE;
+        private bool isAttacking;
     
         void Awake()
         {
@@ -34,51 +35,70 @@ public class PanimationController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                if (currentState == DOWN_IDLE || currentState == WALK_DOWN)
+                isAttacking = true;
+                if (y.Equals(-1))
                 {
                     AnimateState(ATTACK_DOWN);
                 }
-                if (currentState == UP_IDLE || currentState == WALK_UP)
+                else if (y.Equals(1))
                 {
                     AnimateState(ATTACK_UP);
                 }
-                if (currentState == LEFT_IDLE || currentState == WALK_LEFT)
+                else if (y.Equals(0))
                 {
-                    AnimateState(ATTACK_LEFT);
+                    if (currentState == DOWN_IDLE) AnimateState(ATTACK_DOWN);
+                    else if (currentState == UP_IDLE) AnimateState(ATTACK_UP);
                 }
-                if (currentState == RIGHT_IDLE || currentState == WALK_RIGHT)
+                
+                if (x.Equals(-1)) AnimateState(ATTACK_LEFT);
+                else if (x.Equals(1)) AnimateState(ATTACK_RIGHT);
+                else if (x.Equals(0))
                 {
-                    AnimateState(ATTACK_RIGHT);
+                    if (currentState == LEFT_IDLE) AnimateState(ATTACK_LEFT);
+                    else if (currentState == RIGHT_IDLE) AnimateState(ATTACK_RIGHT);
                 }
+                
             }
             else if(Input.GetKeyUp(KeyCode.Space))
             {
-                if (currentState == ATTACK_DOWN)
+                isAttacking = false;
+                switch (currentState)
                 {
-                    if (x.Equals(0))
+                    case ATTACK_DOWN:
                     {
-                        AnimateState(DOWN_IDLE);
+                        if (x.Equals(0))
+                        {
+                            AnimateState(DOWN_IDLE);
+                        }
+
+                        break;
                     }
-                }
-                if (currentState == ATTACK_UP)
-                {
-                    if (x.Equals(0))
+                    case ATTACK_UP:
                     {
-                        AnimateState(UP_IDLE);
+                        if (x.Equals(0))
+                        {
+                            AnimateState(UP_IDLE);
+                        }
+
+                        break;
                     }
-                }
-                if (currentState == ATTACK_LEFT)
-                {
-                    if (y.Equals(0))
+                    case ATTACK_LEFT:
                     {
-                        AnimateState(LEFT_IDLE);
+                        if (y.Equals(0))
+                        {
+                            AnimateState(LEFT_IDLE);
+                        }
+
+                        break;
                     }
-                }
-                if (currentState == ATTACK_RIGHT)
-                {
-                    if (y.Equals(0))
+                    case ATTACK_RIGHT:
                     {
-                        AnimateState(RIGHT_IDLE);
+                        if (y.Equals(0))
+                        {
+                            AnimateState(RIGHT_IDLE);
+                        }
+
+                        break;
                     }
                 }
             }
@@ -86,23 +106,25 @@ public class PanimationController : MonoBehaviour
     
         // Function to store the logic of which animation to play
         // and at what time/Input
-        public void AnimateState(string newState)
+        void AnimateState(string newState)
         {
             // This statement makes sure the same animation is not
             // played twice at the same time
             if (currentState == newState) return;
-    
-            // Statement to play the animations
-            playerAnimator.Play(newState);
-    
+            
             // Statement to change the current animation to the new
             // animation based on user input
             currentState = newState;
+    
+            // Statement to play the animations
+            // playerAnimator.Play(newState);
+            playerAnimator.CrossFade(newState, 0.2f);
         }
     
         // Function to animate player based on user input
         public void AnimatePlayer(float x, float y)
         {
+            if (isAttacking) return;
             switch (x)
             {
                 case 1:
