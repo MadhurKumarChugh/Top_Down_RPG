@@ -69,6 +69,18 @@ public class PlayerMovement : MonoBehaviour
         playerBody.velocity = new Vector2(movedirection.x * moveSpeed, movedirection.y * moveSpeed);
     }
 
+    // Function to restrict player movement
+    public void Freeze()
+    {
+        playerBody.constraints = RigidbodyConstraints2D.FreezeAll;
+    }
+
+    // Function to resume player movement
+    public void UnFreeze()
+    {
+        playerBody.constraints = RigidbodyConstraints2D.FreezeRotation;
+    }
+
     
 
     // void Interact(float movX = 0, float movY = 0)

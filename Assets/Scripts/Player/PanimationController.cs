@@ -23,19 +23,29 @@ public class PanimationController : MonoBehaviour
         Animator playerAnimator;
         // String to store current animation that is playing
         String currentState = DOWN_IDLE;
+        // Boolean to check Player is attacking or not
         private bool isAttacking;
+        // PlayerMovement Script Reference to constraint movement
+        PlayerMovement playerMovement;
     
         void Awake()
         {
-            // Getting the Animator component of the player
+            // Getting the Animator component of player
             playerAnimator = GetComponent<Animator>();
+            // Getting the PlayerMovement Script Component of player
+            playerMovement = GetComponent<PlayerMovement>();
         }
 
+        // A Function to check if player is attacking 
+        // and play attack animations
         public void AttackCheck(float x, float y)
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                // Player movement is stopped while attacking
+                playerMovement.Freeze();
                 isAttacking = true;
+                // if-else checks for UP and DOWN ATTACK animations
                 if (y.Equals(-1))
                 {
                     AnimateState(ATTACK_DOWN);
@@ -50,6 +60,7 @@ public class PanimationController : MonoBehaviour
                     else if (currentState == UP_IDLE) AnimateState(ATTACK_UP);
                 }
                 
+                // if-else checks for LEFT and RIGHT ATTACK animations
                 if (x.Equals(-1)) AnimateState(ATTACK_LEFT);
                 else if (x.Equals(1)) AnimateState(ATTACK_RIGHT);
                 else if (x.Equals(0))
@@ -61,7 +72,10 @@ public class PanimationController : MonoBehaviour
             }
             else if(Input.GetKeyUp(KeyCode.Space))
             {
+                // Player movement resumes while not attacking
+                playerMovement.UnFreeze();
                 isAttacking = false;
+                // switch statement checks to play their idle animations respectively
                 switch (currentState)
                 {
                     case ATTACK_DOWN:
@@ -124,7 +138,13 @@ public class PanimationController : MonoBehaviour
         // Function to animate player based on user input
         public void AnimatePlayer(float x, float y)
         {
+            // if attack animation is playing then "return" will
+            // not let the switch statement run thus locking the
+            // animation at "attacking" and letting it complete before
+            // "walk" animation can be played again
             if (isAttacking) return;
+            // switch statements checks to play walk animations
+            // First for the LEFT and RIGHT WALK animations
             switch (x)
             {
                 case 1:
@@ -149,6 +169,7 @@ public class PanimationController : MonoBehaviour
                 }
             }
     
+            // Now switch checking for UP and DOWN WALK animations
             switch (y)
             {
                 case 1:
