@@ -2,9 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PanimationController : MonoBehaviour
 {
+    [Header("ANIMATION CROSSFADE SETTINGS")]
+    [SerializeField] float normalCrossFadeTime = 0.2f;
+    [SerializeField] float swordCrossFadeTime = 0.7f;
      // Animation State Names In The Animator Window of Unity
         const string DOWN_IDLE = "down_idle";
         const string UP_IDLE = "up_idle";
@@ -18,6 +22,10 @@ public class PanimationController : MonoBehaviour
         const string ATTACK_UP = "attack_up";
         const string ATTACK_LEFT = "attack_left";
         const string ATTACK_RIGHT = "attack_right";
+        const string SWORD_ATTACK_DOWN = "sword_attack_down";
+        const string SWORD_ATTACK_UP = "sword_attack_up";
+        const string SWORD_ATTACK_LEFT = "sword_attack_left";
+        const string SWORD_ATTACK_RIGHT = "sword_attack_right";
     
         // Animator to control player animation by code
         Animator playerAnimator;
@@ -38,7 +46,106 @@ public class PanimationController : MonoBehaviour
 
         // A Function to check if player is attacking 
         // and play attack animations
-        public void AttackCheck(float x, float y)
+        public void AttackChecker(float xVal, float yVal)
+        {
+            SpellAttack(xVal, yVal);
+            SwordAttack(xVal, yVal);
+        }
+    
+        // Function to store the logic of which animation to play
+        // and at what time/Input
+        void AnimateStateNormal(string newState)
+        {
+            // This statement makes sure the same animation is not
+            // played twice at the same time
+            if (currentState == newState) return;
+            
+            // Statement to change the current animation to the new
+            // animation based on user input
+            currentState = newState;
+    
+            // Statement to play the animations
+            // playerAnimator.Play(newState);
+            playerAnimator.CrossFade(newState, normalCrossFadeTime);
+        }
+        
+        // Function to store the logic of which "SWORD" animation to play
+        // and at what time/Input
+        void AnimateStateSword(string newState)
+        {
+            // This statement makes sure the same animation is not
+            // played twice at the same time
+            if (currentState == newState) return;
+            
+            // Statement to change the current animation to the new
+            // animation based on user input
+            currentState = newState;
+    
+            // Statement to play the animations
+            playerAnimator.CrossFade(newState, swordCrossFadeTime);
+        }
+    
+        // Function to animate player based on user input
+        public void AnimatePlayer(float xDir, float yDir)
+        {
+            // if attack animation is playing then "return" will
+            // not let the switch statement run thus locking the
+            // animation at "attacking" and letting it complete before
+            // "walk" animation can be played again
+            if (isAttacking) return;
+            // switch statements checks to play walk animations
+            // First for the LEFT and RIGHT WALK animations
+            switch (xDir)
+            {
+                case 1:
+                    AnimateStateNormal(WALK_RIGHT);
+                    break;
+                case -1:
+                    AnimateStateNormal(WALK_LEFT);
+                    break;
+                default:
+                {
+                    switch (currentState)
+                    {
+                        case WALK_RIGHT:
+                            AnimateStateNormal(RIGHT_IDLE);
+                            break;
+                        case WALK_LEFT:
+                            AnimateStateNormal(LEFT_IDLE);
+                            break;
+                    }
+    
+                    break;
+                }
+            }
+    
+            // Now switch checking for UP and DOWN WALK animations
+            switch (yDir)
+            {
+                case 1:
+                    AnimateStateNormal(WALK_UP);
+                    break;
+                case -1:
+                    AnimateStateNormal(WALK_DOWN);
+                    break;
+                default:
+                {
+                    switch (currentState)
+                    {
+                        case WALK_UP:
+                            AnimateStateNormal(UP_IDLE);
+                            break;
+                        case WALK_DOWN:
+                            AnimateStateNormal(DOWN_IDLE);
+                            break;
+                    }
+    
+                    break;
+                }
+            }
+        }
+
+        void SpellAttack(float x, float y)
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -48,25 +155,25 @@ public class PanimationController : MonoBehaviour
                 // if-else checks for UP and DOWN ATTACK animations
                 if (y.Equals(-1))
                 {
-                    AnimateState(ATTACK_DOWN);
+                    AnimateStateNormal(ATTACK_DOWN);
                 }
                 else if (y.Equals(1))
                 {
-                    AnimateState(ATTACK_UP);
+                    AnimateStateNormal(ATTACK_UP);
                 }
                 else if (y.Equals(0))
                 {
-                    if (currentState == DOWN_IDLE) AnimateState(ATTACK_DOWN);
-                    else if (currentState == UP_IDLE) AnimateState(ATTACK_UP);
+                    if (currentState == DOWN_IDLE) AnimateStateNormal(ATTACK_DOWN);
+                    else if (currentState == UP_IDLE) AnimateStateNormal(ATTACK_UP);
                 }
                 
                 // if-else checks for LEFT and RIGHT ATTACK animations
-                if (x.Equals(-1)) AnimateState(ATTACK_LEFT);
-                else if (x.Equals(1)) AnimateState(ATTACK_RIGHT);
+                if (x.Equals(-1)) AnimateStateNormal(ATTACK_LEFT);
+                else if (x.Equals(1)) AnimateStateNormal(ATTACK_RIGHT);
                 else if (x.Equals(0))
                 {
-                    if (currentState == LEFT_IDLE) AnimateState(ATTACK_LEFT);
-                    else if (currentState == RIGHT_IDLE) AnimateState(ATTACK_RIGHT);
+                    if (currentState == LEFT_IDLE) AnimateStateNormal(ATTACK_LEFT);
+                    else if (currentState == RIGHT_IDLE) AnimateStateNormal(ATTACK_RIGHT);
                 }
                 
             }
@@ -82,7 +189,7 @@ public class PanimationController : MonoBehaviour
                     {
                         if (x.Equals(0))
                         {
-                            AnimateState(DOWN_IDLE);
+                            AnimateStateNormal(DOWN_IDLE);
                         }
 
                         break;
@@ -91,7 +198,7 @@ public class PanimationController : MonoBehaviour
                     {
                         if (x.Equals(0))
                         {
-                            AnimateState(UP_IDLE);
+                            AnimateStateNormal(UP_IDLE);
                         }
 
                         break;
@@ -100,7 +207,7 @@ public class PanimationController : MonoBehaviour
                     {
                         if (y.Equals(0))
                         {
-                            AnimateState(LEFT_IDLE);
+                            AnimateStateNormal(LEFT_IDLE);
                         }
 
                         break;
@@ -109,7 +216,7 @@ public class PanimationController : MonoBehaviour
                     {
                         if (y.Equals(0))
                         {
-                            AnimateState(RIGHT_IDLE);
+                            AnimateStateNormal(RIGHT_IDLE);
                         }
 
                         break;
@@ -117,80 +224,83 @@ public class PanimationController : MonoBehaviour
                 }
             }
         }
-    
-        // Function to store the logic of which animation to play
-        // and at what time/Input
-        void AnimateState(string newState)
+
+        void SwordAttack(float xd, float yd)
         {
-            // This statement makes sure the same animation is not
-            // played twice at the same time
-            if (currentState == newState) return;
-            
-            // Statement to change the current animation to the new
-            // animation based on user input
-            currentState = newState;
-    
-            // Statement to play the animations
-            // playerAnimator.Play(newState);
-            playerAnimator.CrossFade(newState, 0.2f);
-        }
-    
-        // Function to animate player based on user input
-        public void AnimatePlayer(float x, float y)
-        {
-            // if attack animation is playing then "return" will
-            // not let the switch statement run thus locking the
-            // animation at "attacking" and letting it complete before
-            // "walk" animation can be played again
-            if (isAttacking) return;
-            // switch statements checks to play walk animations
-            // First for the LEFT and RIGHT WALK animations
-            switch (x)
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                case 1:
-                    AnimateState(WALK_RIGHT);
-                    break;
-                case -1:
-                    AnimateState(WALK_LEFT);
-                    break;
-                default:
+                // Player movement is stopped while attacking
+                playerMovement.Freeze();
+                isAttacking = true;
+                // if-else checks for UP and DOWN ATTACK animations
+                if (yd.Equals(-1))
                 {
-                    switch (currentState)
-                    {
-                        case WALK_RIGHT:
-                            AnimateState(RIGHT_IDLE);
-                            break;
-                        case WALK_LEFT:
-                            AnimateState(LEFT_IDLE);
-                            break;
-                    }
-    
-                    break;
+                    AnimateStateSword(SWORD_ATTACK_DOWN);
                 }
-            }
-    
-            // Now switch checking for UP and DOWN WALK animations
-            switch (y)
-            {
-                case 1:
-                    AnimateState(WALK_UP);
-                    break;
-                case -1:
-                    AnimateState(WALK_DOWN);
-                    break;
-                default:
+                else if (yd.Equals(1))
                 {
-                    switch (currentState)
+                    AnimateStateSword(SWORD_ATTACK_UP);
+                }
+                else if (yd.Equals(0))
+                {
+                    if (currentState == DOWN_IDLE) AnimateStateSword(SWORD_ATTACK_DOWN);
+                    else if (currentState == UP_IDLE) AnimateStateSword(SWORD_ATTACK_UP);
+                }
+                
+                // if-else checks for LEFT and RIGHT ATTACK animations
+                if (xd.Equals(-1)) AnimateStateSword(SWORD_ATTACK_LEFT);
+                else if (xd.Equals(1)) AnimateStateSword(SWORD_ATTACK_RIGHT);
+                else if (xd.Equals(0))
+                {
+                    if (currentState == LEFT_IDLE) AnimateStateSword(SWORD_ATTACK_LEFT);
+                    else if (currentState == RIGHT_IDLE) AnimateStateSword(SWORD_ATTACK_RIGHT);
+                }
+                
+            }
+            else if(Input.GetKeyUp(KeyCode.E))
+            {
+                // Player movement resumes while not attacking
+                playerMovement.UnFreeze();
+                isAttacking = false;
+                // switch statement checks to play their idle animations respectively
+                switch (currentState)
+                {
+                    case SWORD_ATTACK_DOWN:
                     {
-                        case WALK_UP:
-                            AnimateState(UP_IDLE);
-                            break;
-                        case WALK_DOWN:
-                            AnimateState(DOWN_IDLE);
-                            break;
+                        if (xd.Equals(0))
+                        {
+                            AnimateStateSword(DOWN_IDLE);
+                        }
+
+                        break;
                     }
-    
-                    break;
+                    case SWORD_ATTACK_UP:
+                    {
+                        if (xd.Equals(0))
+                        {
+                            AnimateStateSword(UP_IDLE);
+                        }
+
+                        break;
+                    }
+                    case SWORD_ATTACK_LEFT:
+                    {
+                        if (yd.Equals(0))
+                        {
+                            AnimateStateSword(LEFT_IDLE);
+                        }
+
+                        break;
+                    }
+                    case SWORD_ATTACK_RIGHT:
+                    {
+                        if (yd.Equals(0))
+                        {
+                            AnimateStateSword(RIGHT_IDLE);
+                        }
+
+                        break;
+                    }
                 }
             }
         }

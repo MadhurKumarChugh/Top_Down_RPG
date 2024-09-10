@@ -52,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
         
         // Calling AnimatePlayer Function of Animation Controller Script
         animationController.AnimatePlayer(moveX, moveY);
-        animationController.AttackCheck(moveX, moveY);
+        animationController.AttackChecker(moveX, moveY);
         
         
         // Storing the input in movedirection vector
