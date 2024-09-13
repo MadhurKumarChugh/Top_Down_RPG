@@ -227,7 +227,8 @@ public class PanimationController : MonoBehaviour
 
         void SwordAttack(float xd, float yd)
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            // Play animation at right click
+            if (Input.GetMouseButtonDown(1))
             {
                 // Player movement is stopped while attacking
                 playerMovement.Freeze();
@@ -257,7 +258,7 @@ public class PanimationController : MonoBehaviour
                 }
                 
             }
-            else if(Input.GetKeyUp(KeyCode.E))
+            else if(Input.GetMouseButtonUp(1))
             {
                 // Player movement resumes while not attacking
                 playerMovement.UnFreeze();
