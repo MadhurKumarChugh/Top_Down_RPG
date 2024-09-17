@@ -9,19 +9,25 @@ public class PanimationController : MonoBehaviour
     [Header("ANIMATION CROSSFADE SETTINGS")]
     [SerializeField] float normalCrossFadeTime = 0.2f;
     [SerializeField] float swordCrossFadeTime = 0.7f;
+    
      // Animation State Names In The Animator Window of Unity
+/************************************************PLAYER ANIMATIONS*****************************************************/
+        /************IDLE************/
         const string DOWN_IDLE = "down_idle";
         const string UP_IDLE = "up_idle";
         const string LEFT_IDLE = "left_idle";
         const string RIGHT_IDLE = "right_idle";
+        /************WALK************/
         const string WALK_DOWN = "walk_down";
         const string WALK_UP = "walk_up";
         const string WALK_LEFT = "walk_left";
         const string WALK_RIGHT = "walk_right";
+        /************ATTACK************/
         const string ATTACK_DOWN = "attack_down";
         const string ATTACK_UP = "attack_up";
         const string ATTACK_LEFT = "attack_left";
         const string ATTACK_RIGHT = "attack_right";
+        /************SWORD ATTACK************/
         const string SWORD_ATTACK_DOWN = "sword_attack_down";
         const string SWORD_ATTACK_UP = "sword_attack_up";
         const string SWORD_ATTACK_LEFT = "sword_attack_left";
