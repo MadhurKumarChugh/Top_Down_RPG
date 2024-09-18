@@ -15,11 +15,11 @@ public class Spell : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.velocity = -transform.right * fireForce;
+        rb.velocity = transform.right * fireForce;
     }
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        Destroy(gameObject, 2f);
+        Destroy(gameObject, 1f);
     }
 }

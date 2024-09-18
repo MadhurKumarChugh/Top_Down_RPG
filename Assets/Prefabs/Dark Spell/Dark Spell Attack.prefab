@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4544073637110839235}
   - component: {fileID: 4544073637110839232}
   - component: {fileID: 7137959417444861547}
+  - component: {fileID: 8147338596798368880}
   m_Layer: 0
   m_Name: Dark Spell Attack
   m_TagString: Untagged
@@ -154,3 +155,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireForce: 15
+--- !u!95 &8147338596798368880
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4544073637110839239}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 58cf5b776a21adc4fa9dc5760183fabf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

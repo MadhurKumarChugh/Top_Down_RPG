@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D playerBody;
     // Animation Controller Script component of player
     PanimationController animationController;
+    PlayerShooting _shooting;
     
     void Awake()
     {
@@ -21,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
         playerBody = GetComponent<Rigidbody2D>();
         // Getting the Animator Controller Script component of the player
         animationController = GetComponent<PanimationController>();
+        _shooting = GetComponent<PlayerShooting>();
     }
 
     // Update is called once per frame
@@ -53,6 +55,7 @@ public class PlayerMovement : MonoBehaviour
         // Calling AnimatePlayer Function of Animation Controller Script
         animationController.AnimatePlayer(moveX, moveY);
         animationController.AttackChecker(moveX, moveY);
+        _shooting.FirePointer(moveX, moveY);
         
         
         // Storing the input in movedirection vector
