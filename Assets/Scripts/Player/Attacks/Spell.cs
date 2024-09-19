@@ -6,7 +6,8 @@ using UnityEngine;
 public class Spell : MonoBehaviour
 {
     Rigidbody2D rb;
-    public float fireForce = 20f;
+    [SerializeField] float fireForce = 20f;
+    [SerializeField] float lifeTime = 1f;
 
     void Awake()
     {
@@ -20,6 +21,6 @@ public class Spell : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        Destroy(gameObject, 1f);
+        if(!other.gameObject.CompareTag("Player")) Destroy(gameObject, lifeTime);
     }
 }

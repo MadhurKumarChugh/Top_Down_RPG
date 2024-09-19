@@ -9,19 +9,21 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float moveSpeed;
     
     // A movement vector to store input from user
-    Vector2 movedirection;
+    Vector2 _movedirection;
     // Rigidbody object component of player
-    Rigidbody2D playerBody;
+    Rigidbody2D _playerBody;
     // Animation Controller Script component of player
-    PanimationController animationController;
+    PanimationController _animationController;
+    // Player Shooting Script component of player 
     PlayerShooting _shooting;
     
     void Awake()
     {
         // Getting the Rigidbody2D component of the player
-        playerBody = GetComponent<Rigidbody2D>();
+        _playerBody = GetComponent<Rigidbody2D>();
         // Getting the Animator Controller Script component of the player
-        animationController = GetComponent<PanimationController>();
+        _animationController = GetComponent<PanimationController>();
+        // Getting the Player Shooting Script component
         _shooting = GetComponent<PlayerShooting>();
     }
 
@@ -53,36 +55,37 @@ public class PlayerMovement : MonoBehaviour
         }
         
         // Calling AnimatePlayer Function of Animation Controller Script
-        animationController.AnimatePlayer(moveX, moveY);
-        animationController.AttackChecker(moveX, moveY);
+        _animationController.AnimatePlayer(moveX, moveY);
+        _animationController.AttackChecker(moveX, moveY);
+        // Calling FirePointer Function of Player Shooting Script
         _shooting.FirePointer(moveX, moveY);
         
         
         // Storing the input in movedirection vector
-        movedirection = new Vector2(moveX, moveY);
+        _movedirection = new Vector2(moveX, moveY);
         
         // To normalize diagonal movement
         // If not implemented, diagonal movement will be higher than left-right,up-down movement
-        movedirection.Normalize();
+        _movedirection.Normalize();
     }
 
     void Move()
     {
         // Using velocity to move player
-        playerBody.velocity = new Vector2(movedirection.x * (moveSpeed * Time.fixedDeltaTime), 
-            movedirection.y * (moveSpeed * Time.fixedDeltaTime));
+        _playerBody.velocity = new Vector2(_movedirection.x * (moveSpeed * Time.fixedDeltaTime), 
+            _movedirection.y * (moveSpeed * Time.fixedDeltaTime));
     }
 
     // Function to restrict player movement
     public void Freeze()
     {
-        playerBody.constraints = RigidbodyConstraints2D.FreezeAll;
+        _playerBody.constraints = RigidbodyConstraints2D.FreezeAll;
     }
 
     // Function to resume player movement
     public void UnFreeze()
     {
-        playerBody.constraints = RigidbodyConstraints2D.FreezeRotation;
+        _playerBody.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
     

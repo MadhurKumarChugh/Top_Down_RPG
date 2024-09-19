@@ -154,7 +154,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae94f572d7d28524a88e23b22de07a4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireForce: 15
+  fireForce: 12.5
+  lifeTime: 0.25
 --- !u!95 &3944204952923876845
 Animator:
   serializedVersion: 3

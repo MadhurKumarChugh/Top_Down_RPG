@@ -53,13 +53,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 822601481}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -0.32, y: -0.34, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6079601594445964099}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &1308299152
 GameObject:
   m_ObjectHideFlags: 0
@@ -322,4 +322,6 @@ MonoBehaviour:
   firePointRight: {fileID: 1386868533}
   firePointLeft: {fileID: 822601482}
   spell: {fileID: 4544073637110839239, guid: 83851a1b1248c694ab706e2043303d9e, type: 3}
-  cooldown: 0.2
+  spellDown: {fileID: 4544073637110839239, guid: 8cf70ca9bcd10cc45b0c10f8c1b4fd89, type: 3}
+  spellLeft: {fileID: 4544073637110839239, guid: 83851a1b1248c694ab706e2043303d9e, type: 3}
+  cooldown: 0.3

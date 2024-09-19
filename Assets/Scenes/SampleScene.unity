@@ -8393,26 +8393,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 822601482, guid: 57efa443a8863674c9654c127997c815, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 822601482, guid: 57efa443a8863674c9654c127997c815, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 822601482, guid: 57efa443a8863674c9654c127997c815, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
-      objectReference: {fileID: 0}
-    - target: {fileID: 6079601594333330171, guid: 57efa443a8863674c9654c127997c815, type: 3}
-      propertyPath: spellDown
-      value: 
-      objectReference: {fileID: 4544073637110839239, guid: 8cf70ca9bcd10cc45b0c10f8c1b4fd89, type: 3}
-    - target: {fileID: 6079601594333330171, guid: 57efa443a8863674c9654c127997c815, type: 3}
-      propertyPath: spellLeft
-      value: 
-      objectReference: {fileID: 4544073637110839239, guid: 83851a1b1248c694ab706e2043303d9e, type: 3}
     - target: {fileID: 6079601594445964097, guid: 57efa443a8863674c9654c127997c815, type: 3}
       propertyPath: m_Name
       value: Player
