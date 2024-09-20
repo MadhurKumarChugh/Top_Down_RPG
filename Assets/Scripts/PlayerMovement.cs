@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("ANIMATION CROSSFADE SETTINGS")]
+    [SerializeField] float normalCrossFadeTime = 0.2f;
+    private enum State
+    {
+        down_idle,
+        UpIdle,
+        walk_down,
+        walk_up
+    }
     const string DOWN_IDLE = "down_idle";
     const string WALK_DOWN = "walk_down";
     const string WALK_UP = "walk_up";
@@ -19,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     // Animator to control player animation by code
     Animator playerAnimator;
     private String currentState = DOWN_IDLE;
+    // private State _state = State.down_idle;
     
     void Awake()
     {
@@ -55,9 +65,9 @@ public class PlayerMovement : MonoBehaviour
             moveY = 0;
         }
         
-        if(moveY.Equals(1)) {AnimatePlayer(WALK_UP);}
-        else if(moveY.Equals(-1)) {AnimatePlayer(WALK_DOWN);}
-        else AnimatePlayer(DOWN_IDLE);
+        if(moveY.Equals(1)) {AnimatePlayer(State.walk_up.ToString());}
+        else if(moveY.Equals(-1)) {AnimatePlayer(State.walk_down.ToString());}
+        else AnimatePlayer(State.down_idle.ToString());
         
         // Storing the input in movedirection vector
         movedirection = new Vector2(moveX, moveY);
@@ -78,7 +88,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (currentState == newState) return;
         
-        playerAnimator.Play(newState);
+        playerAnimator.CrossFade(newState, normalCrossFadeTime);
         
         currentState = newState;
     }
