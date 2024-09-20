@@ -7917,7 +7917,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1822801925a269f4c93a09bf4b24ea5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 4
+  normalCrossFadeTime: 0.01
+  moveSpeed: 225
 --- !u!50 &989551037
 Rigidbody2D:
   serializedVersion: 4
@@ -8356,7 +8357,7 @@ SpriteRenderer:
   m_Size: {x: 2, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &2044171948

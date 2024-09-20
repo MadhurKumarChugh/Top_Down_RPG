@@ -80,7 +80,8 @@ public class PlayerMovement : MonoBehaviour
     void Move()
     {
         // Using velocity to move player
-        playerBody.velocity = new Vector2(movedirection.x * moveSpeed, movedirection.y * moveSpeed);
+        playerBody.velocity = new Vector2(movedirection.x * (moveSpeed * Time.fixedDeltaTime)
+                                          , movedirection.y * (moveSpeed * Time.fixedDeltaTime));
     }
     
     // Function to control all animations
