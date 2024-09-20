@@ -57,4 +57,14 @@ public class NPCController : MonoBehaviour, Interactable
         // Started Show Message coroutine
         StartCoroutine(Interacting());
     }
+
+    public void Move()
+    {
+        
+    }
+
+    public void TakeDamage()
+    {
+        
+    }
 }

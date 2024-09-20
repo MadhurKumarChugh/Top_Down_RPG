@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4544073637110839239
+--- !u!1 &2226466930712922780
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,40 +8,40 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4544073637110839233}
-  - component: {fileID: 4544073637110839238}
-  - component: {fileID: 4544073637110839235}
-  - component: {fileID: 4544073637110839232}
-  - component: {fileID: 7137959417444861547}
-  - component: {fileID: 3944204952923876845}
+  - component: {fileID: 2226466930712922778}
+  - component: {fileID: 2226466930712922781}
+  - component: {fileID: 2226466930712922776}
+  - component: {fileID: 2226466930712922779}
+  - component: {fileID: 2226466930712922777}
+  - component: {fileID: 2226466930712922774}
   m_Layer: 0
-  m_Name: Dark Spell Attack Down
+  m_Name: Skeleton Enemy 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4544073637110839233
+--- !u!4 &2226466930712922778
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4544073637110839239}
+  m_GameObject: {fileID: 2226466930712922780}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.58, y: -0.81, z: 0}
+  m_LocalPosition: {x: 4.81, y: -3.24, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &4544073637110839238
+--- !u!212 &2226466930712922781
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4544073637110839239}
+  m_GameObject: {fileID: 2226466930712922780}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -75,25 +75,50 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 20
-  m_Sprite: {fileID: 5322389570696283013, guid: d11d6b315e89c4441ae754f542c1e4ce, type: 3}
+  m_Sprite: {fileID: 2648387550499911198, guid: 55f52f8a06983b24890b50ae5cd28a3b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.8181819, y: 1.4545455}
+  m_Size: {x: 1.3333334, y: 1.3333334}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &4544073637110839235
+--- !u!114 &2226466930712922776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2226466930712922780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ff5702a25d3e2841a2399d1295f1a0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2226466930712922779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2226466930712922780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d755803b071950747bcfe8589d562b6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 2
+--- !u!50 &2226466930712922777
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4544073637110839239}
+  m_GameObject: {fileID: 2226466930712922780}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -103,17 +128,17 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
---- !u!60 &4544073637110839232
+--- !u!60 &2226466930712922774
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4544073637110839239}
+  m_GameObject: {fileID: 2226466930712922780}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -124,54 +149,16 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.6666666, y: 1.3333334}
-    newSize: {x: 1.8181819, y: 1.4545455}
+    oldSize: {x: 1.3333334, y: 1.3333334}
+    newSize: {x: 1.3333334, y: 1.3333334}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.1325724, y: 0.30034542}
-      - {x: -0.20461614, y: 0.30121827}
-      - {x: -0.20733851, y: 0.21164021}
-      - {x: -0.20970398, y: -0.16938895}
-      - {x: -0.20576033, y: -0.3249064}
-      - {x: 0.03294031, y: -0.39447737}
-      - {x: 0.33860788, y: -0.38947126}
-      - {x: 0.3705087, y: -0.3138372}
-      - {x: 0.36855593, y: 0.21354984}
-      - {x: 0.19344273, y: 0.30857357}
---- !u!114 &7137959417444861547
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4544073637110839239}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae94f572d7d28524a88e23b22de07a4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fireForce: 325
-  lifeTime: 0.25
---- !u!95 &3944204952923876845
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4544073637110839239}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 58cf5b776a21adc4fa9dc5760183fabf, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+    - - {x: -0.28634328, y: 0.6091711}
+      - {x: -0.46834314, y: 0.54117024}
+      - {x: -0.43767822, y: -0.67433256}
+      - {x: 0.3773427, y: -0.67049974}
+      - {x: 0.35817766, y: 0.6168372}

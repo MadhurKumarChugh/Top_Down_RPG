@@ -16,7 +16,7 @@ public class Spell : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.velocity = transform.right * fireForce;
+        rb.velocity = transform.right * (fireForce * Time.fixedDeltaTime);
     }
 
     void OnCollisionEnter2D(Collision2D other)
