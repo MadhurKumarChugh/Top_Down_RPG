@@ -7831,6 +7831,7 @@ GameObject:
   - component: {fileID: 989551034}
   - component: {fileID: 989551037}
   - component: {fileID: 989551036}
+  - component: {fileID: 989551040}
   - component: {fileID: 989551039}
   - component: {fileID: 989551038}
   m_Layer: 0
@@ -7917,7 +7918,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1822801925a269f4c93a09bf4b24ea5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalCrossFadeTime: 0.01
+  normalCrossFadeTime: 0.2
   moveSpeed: 225
 --- !u!50 &989551037
 Rigidbody2D:
@@ -7985,6 +7986,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &989551040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 989551033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4728d892672f052448319e39723a8feb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalCrossFadeTime: 0.2
 --- !u!1 &1964060185
 GameObject:
   m_ObjectHideFlags: 0
