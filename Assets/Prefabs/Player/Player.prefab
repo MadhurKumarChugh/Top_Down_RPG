@@ -133,9 +133,9 @@ GameObject:
   - component: {fileID: 6079601594445964101}
   - component: {fileID: 6079601594445964100}
   - component: {fileID: 8974064406484010865}
+  - component: {fileID: 6079601594333330171}
   - component: {fileID: 6079601594445964103}
   - component: {fileID: 6079601594445964102}
-  - component: {fileID: 6079601594333330171}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -259,7 +259,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   normalCrossFadeTime: 0.2
-  swordCrossFadeTime: 0.7
+  swordCrossFadeTime: 0
+--- !u!114 &6079601594333330171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6079601594445964097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b526a3e7ec7615140a1b33782540cc09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firePointUp: {fileID: 176097311}
+  firePointDown: {fileID: 1308299153}
+  firePointRight: {fileID: 1386868533}
+  firePointLeft: {fileID: 822601482}
+  spell: {fileID: 4544073637110839239, guid: 83851a1b1248c694ab706e2043303d9e, type: 3}
+  spellDown: {fileID: 4544073637110839239, guid: 8cf70ca9bcd10cc45b0c10f8c1b4fd89, type: 3}
+  spellLeft: {fileID: 4544073637110839239, guid: 83851a1b1248c694ab706e2043303d9e, type: 3}
+  cooldown: 0.3
 --- !u!95 &6079601594445964103
 Animator:
   serializedVersion: 3
@@ -305,23 +325,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.49713492, y: 0.1425811}
   m_EdgeRadius: 0
---- !u!114 &6079601594333330171
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6079601594445964097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b526a3e7ec7615140a1b33782540cc09, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  firePointUp: {fileID: 176097311}
-  firePointDown: {fileID: 1308299153}
-  firePointRight: {fileID: 1386868533}
-  firePointLeft: {fileID: 822601482}
-  spell: {fileID: 4544073637110839239, guid: 83851a1b1248c694ab706e2043303d9e, type: 3}
-  spellDown: {fileID: 4544073637110839239, guid: 8cf70ca9bcd10cc45b0c10f8c1b4fd89, type: 3}
-  spellLeft: {fileID: 4544073637110839239, guid: 83851a1b1248c694ab706e2043303d9e, type: 3}
-  cooldown: 0.3
