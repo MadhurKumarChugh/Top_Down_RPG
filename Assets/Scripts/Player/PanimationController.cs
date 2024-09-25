@@ -9,6 +9,12 @@ public class PanimationController : MonoBehaviour
     [Header("ANIMATION CROSSFADE SETTINGS")]
     [SerializeField] float normalCrossFadeTime = 0.2f;
     [SerializeField] float swordCrossFadeTime = 0.7f;
+    
+    Sword swordColl;
+
+    bool swordAtk;
+
+    public bool SwordAtk => swordAtk;
 
     private enum State
     {
@@ -50,7 +56,27 @@ public class PanimationController : MonoBehaviour
             playerAnimator = GetComponent<Animator>();
             // Getting the PlayerMovement Script Component of player
             playerMovement = GetComponent<PlayerMovement>();
+            swordColl = GetComponent<Sword>();
         }
+
+        // void MouseTracker()
+        // {
+        //     Vector2 mousePos = Input.mousePosition;
+        //     Vector2 playerScreenPoint = Camera.main.WorldToScreenPoint(transform.position);
+        //     
+        //     float diffX = mousePos.x - playerScreenPoint.x;
+        //     float diffY = mousePos.y - playerScreenPoint.y;
+        //     if(diffX > 0.0f && diffY > 0.0f) Debug.Log("QUAD 1");
+        //     else if(diffX > 0.0f && diffY < 0.0f) Debug.Log("QUAD 4");
+        //     else if(diffX < 0.0f && diffY < 0.0f) Debug.Log("QUAD 3");
+        //     else if(diffX < 0.0f && diffY > 0.0f) Debug.Log("QUAD 2");
+        //     
+        //     // if(mousePos.x < playerScreenPoint.x) Debug.Log("LEFT");
+        //     // else Debug.Log("RIGHT");
+        //     
+        //     // if(mousePosition.y < playerScreenPoint.y) Debug.Log("DOWN");
+        //     // else Debug.Log("UP");
+        // }
 
         // A Function to check if player is attacking 
         // and play attack animations
@@ -226,11 +252,13 @@ public class PanimationController : MonoBehaviour
         void SwordAttack(float xd, float yd)
         {
             // Play animation at right click
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonDown(1) && !swordColl.swordCollider.activeInHierarchy)
             {
                 // Player movement is stopped while attacking
                 playerMovement.Freeze();
                 isAttacking = true;
+                swordAtk = true;
+                swordColl.swordCollider.SetActive(true);
                 // if-else checks for UP and DOWN ATTACK animations
                 if (yd.Equals(-1))
                 {
@@ -260,11 +288,13 @@ public class PanimationController : MonoBehaviour
                 }
                 
             }
-            else if(Input.GetMouseButtonUp(1))
+            else if(Input.GetMouseButtonUp(1) && swordColl.swordCollider.activeInHierarchy)
             {
                 // Player movement resumes while not attacking
                 playerMovement.UnFreeze();
                 isAttacking = false;
+                swordAtk = false;
+                swordColl.swordCollider.SetActive(false);
                 // switch statement checks to play their idle animations respectively
                 if (currentState == SWORD_ATTACK_DOWN)
                 {

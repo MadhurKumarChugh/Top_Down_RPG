@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -24,12 +25,14 @@ public class PlayerShooting : MonoBehaviour
     // Point from which the spell will be fired 
     Transform _firePoint;
     // Variable to store which coroutine is running
-    Coroutine fire;
+    [CanBeNull] Coroutine fire;
+    PanimationController _anim;
 
     void Awake()
     {
         // Setting default firing point to down
         _firePoint = firePointDown;
+        _anim = GetComponent<PanimationController>();
     }
     
     // Start is called before the first frame update
@@ -53,9 +56,9 @@ public class PlayerShooting : MonoBehaviour
     void ProcessInput()
     {
         // if space is pressed start firing
-        if (Input.GetKeyDown(KeyCode.Space)) FireChecker();
+        if (Input.GetKeyDown(KeyCode.Space) && !_anim.SwordAtk) FireChecker();
         // otherwise stop firing
-        else if (Input.GetKeyUp(KeyCode.Space)) StopCoroutine(fire);
+        else if (Input.GetKeyUp(KeyCode.Space) && fire != null) StopCoroutine(fire);
     }
 
     // Function to set the firing point to whatever
