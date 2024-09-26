@@ -6,17 +6,20 @@ using UnityEngine.Serialization;
 
 public class PanimationController : MonoBehaviour
 {
-    [Header("ANIMATION CROSSFADE SETTINGS")] [SerializeField]
-    float normalCrossFadeTime = 0.2f;
-
+    [Header("ANIMATION CROSSFADE SETTINGS")] 
+    [SerializeField] float normalCrossFadeTime = 0.2f;
     [SerializeField] float swordCrossFadeTime = 0.7f;
 
-    Sword swordColl;
+    // Sword variable to get & change the sword collider
+    Sword _swordColl;
+    // Variable to check sword attacking is playing or not
+    bool _swordAtk;
 
-    bool swordAtk;
+    // Getter to get back the value of private var _swordAtk
+    public bool SwordAtk => _swordAtk;
 
-    public bool SwordAtk => swordAtk;
-
+    // Animation State Names In The Animator Window of Unity
+/************************************************PLAYER ANIMATIONS*****************************************************/
     private enum State
     {
         down_idle,
@@ -30,18 +33,14 @@ public class PanimationController : MonoBehaviour
         attack_down,
         attack_up,
         attack_left,
-        attack_right
+        attack_right,
+        sword_attack_down,
+        sword_attack_up,
+        sword_attack_left,
+        sword_attack_right,
     }
-
-    // Animation State Names In The Animator Window of Unity
-/************************************************PLAYER ANIMATIONS*****************************************************/
+    
     const string DOWN_IDLE = "down_idle";
-
-    /************SWORD ATTACK************/
-    const string SWORD_ATTACK_DOWN = "sword_attack_down";
-    const string SWORD_ATTACK_UP = "sword_attack_up";
-    const string SWORD_ATTACK_LEFT = "sword_attack_left";
-    const string SWORD_ATTACK_RIGHT = "sword_attack_right";
 
     // Animator to control player animation by code
     Animator playerAnimator;
@@ -61,7 +60,7 @@ public class PanimationController : MonoBehaviour
         playerAnimator = GetComponent<Animator>();
         // Getting the PlayerMovement Script Component of player
         playerMovement = GetComponent<PlayerMovement>();
-        swordColl = GetComponent<Sword>();
+        _swordColl = GetComponent<Sword>();
     }
 
     // void MouseTracker()
@@ -256,80 +255,83 @@ public class PanimationController : MonoBehaviour
     void SwordAttack(float xd, float yd)
     {
         // Play animation at right click
-        if (Input.GetMouseButtonDown(1) && !swordColl.swordCollider.activeInHierarchy)
+        if (Input.GetMouseButtonDown(1) && !_swordColl.swordCollider.activeInHierarchy)
         {
             // Player movement is stopped while attacking
             playerMovement.Freeze();
             isAttacking = true;
-            swordAtk = true;
-            swordColl.swordCollider.SetActive(true);
+            _swordAtk = true;
+            // Activating Sword Collider
+            _swordColl.swordCollider.SetActive(true);
             // if-else checks for UP and DOWN ATTACK animations
             if (yd.Equals(-1))
             {
-                AnimateStateSword(SWORD_ATTACK_DOWN);
-                swordColl.RotateDown();
+                AnimateStateSword(State.sword_attack_down.ToString());
+                _swordColl.RotateDown();
             }
             else if (yd.Equals(1))
             {
-                AnimateStateSword(SWORD_ATTACK_UP);
-                swordColl.RotateUp();
+                AnimateStateSword(State.sword_attack_up.ToString());
+                _swordColl.RotateUp();
             }
             else if (yd.Equals(0))
             {
                 if (currentState == State.down_idle.ToString())
                 {
-                    AnimateStateSword(SWORD_ATTACK_DOWN);
-                    swordColl.RotateDown();
+                    AnimateStateSword(State.sword_attack_down.ToString());
+                    _swordColl.RotateDown();
                 }
                 else if (currentState == State.up_idle.ToString())
                 {
-                    AnimateStateSword(SWORD_ATTACK_UP);
-                    swordColl.RotateUp();
+                    AnimateStateSword(State.sword_attack_up.ToString());
+                    _swordColl.RotateUp();
                 }
             }
 
             // if-else checks for LEFT and RIGHT ATTACK animations
-            if (xd.Equals(-1)) {AnimateStateSword(SWORD_ATTACK_LEFT); swordColl.RotateLeft();}
-            else if (xd.Equals(1)) {AnimateStateSword(SWORD_ATTACK_RIGHT); swordColl.RotateRight();}
+            if (xd.Equals(-1)) {AnimateStateSword(State.sword_attack_left.ToString()); _swordColl.RotateLeft();}
+            else if (xd.Equals(1)) {AnimateStateSword(State.sword_attack_right.ToString()); _swordColl.RotateRight();}
             else if (xd.Equals(0))
             {
                 if (currentState == State.left_idle.ToString())
-                {AnimateStateSword(SWORD_ATTACK_LEFT); swordColl.RotateLeft();}
+                {AnimateStateSword(State.sword_attack_left.ToString()); _swordColl.RotateLeft();}
                 else if (currentState == State.right_idle.ToString())
-                {AnimateStateSword(SWORD_ATTACK_RIGHT); swordColl.RotateRight();}
+                {AnimateStateSword(State.sword_attack_right.ToString()); _swordColl.RotateRight();}
             }
         }
-        else if (Input.GetMouseButtonUp(1) && swordColl.swordCollider.activeInHierarchy)
+        else if (Input.GetMouseButtonUp(1) && _swordColl.swordCollider.activeInHierarchy)
         {
             // Player movement resumes while not attacking
             playerMovement.UnFreeze();
             isAttacking = false;
-            swordAtk = false;
-            swordColl.swordCollider.SetActive(false);
-            swordColl.RotateDown();
+            _swordAtk = false;
+            // Deactivating Sword Collider and rotating it
+            // its original down position
+            _swordColl.swordCollider.SetActive(false);
+            _swordColl.RotateDown();
             // switch statement checks to play their idle animations respectively
-            if (currentState == SWORD_ATTACK_DOWN)
+            if (currentState == State.sword_attack_down.ToString())
             {
                 if (xd.Equals(0))
                 {
                     AnimateStateSword(State.down_idle.ToString());
                 }
             }
-            else if (currentState == SWORD_ATTACK_UP)
+            else if (currentState == State.sword_attack_up.ToString())
             {
                 if (xd.Equals(0))
                 {
                     AnimateStateSword(State.up_idle.ToString());
                 }
             }
-            else if (currentState == SWORD_ATTACK_LEFT)
+            else if (currentState == State.sword_attack_left.ToString())
             {
                 if (yd.Equals(0))
                 {
                     AnimateStateSword(State.left_idle.ToString());
                 }
             }
-            else if (currentState == SWORD_ATTACK_RIGHT)
+            else if (currentState == State.sword_attack_right.ToString())
             {
                 if (yd.Equals(0))
                 {

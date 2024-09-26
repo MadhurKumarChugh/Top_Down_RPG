@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class Sword : MonoBehaviour
 {
+    // Object to set sword collider on or off
+    // in Panimation Script 
     public GameObject swordCollider;
 
+/**********************FUNCTIONS TO ROTATE SWORD COLLIDER BASED ON THE DIRECTION PLAYER IS FACING**********************/    
     public void RotateLeft()
     {
         swordCollider.transform.rotation = Quaternion.Euler(0, 0, -90);

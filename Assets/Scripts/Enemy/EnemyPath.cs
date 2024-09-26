@@ -9,10 +9,12 @@ public class EnemyPath : MonoBehaviour
     [SerializeField] float movementSpeed = 2f;
 
     Rigidbody2D _enemybody;
+    // Vector to hold movement direction of enemy
     Vector2 _moveDir;
 
     void Awake()
     {
+        // Getting Rigidbody component of enemy
         _enemybody = GetComponent<Rigidbody2D>();
     }
 
@@ -30,12 +32,15 @@ public class EnemyPath : MonoBehaviour
 
     void FixedUpdate()
     {
+        // Currently moving player using MovePosition Function
+        // TODO: Might change in the future to move using _enemybody.velocity 
         _enemybody.MovePosition(_enemybody.position + _moveDir * (movementSpeed * Time.fixedDeltaTime));
     }
 
     // Target Position
     public void MoveTo(Vector2 targetPos)
     {
+        // Setting the new movement direction to target position
         _moveDir = targetPos;
     }
 }
