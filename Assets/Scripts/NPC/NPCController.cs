@@ -58,9 +58,9 @@ public class NPCController : MonoBehaviour, Interactable
         StartCoroutine(Interacting());
     }
 
-    public void Move()
+    public void Move(Vector2 targetDir)
     {
-        
+        throw new System.NotImplementedException();
     }
 
     public void TakeDamage()

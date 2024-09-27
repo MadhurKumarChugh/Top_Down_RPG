@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyPath : MonoBehaviour
+public class EnemyPath : MonoBehaviour, Interactable
 {
     [Header("ENEMY MOVEMENT")]
     [SerializeField] float movementSpeed = 2f;
@@ -32,15 +32,24 @@ public class EnemyPath : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Currently moving player using MovePosition Function
-        // TODO: Might change in the future to move using _enemybody.velocity 
-        _enemybody.MovePosition(_enemybody.position + _moveDir * (movementSpeed * Time.fixedDeltaTime));
+        // Moving enemy using velocity
+        _enemybody.velocity = _moveDir * (movementSpeed * Time.fixedDeltaTime);
     }
 
     // Target Position
-    public void MoveTo(Vector2 targetPos)
+    public void Move(Vector2 targetDir)
     {
         // Setting the new movement direction to target position
-        _moveDir = targetPos;
+        _moveDir = targetDir;
+    }
+
+    public void Interact()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void TakeDamage()
+    {
+        throw new NotImplementedException();
     }
 }

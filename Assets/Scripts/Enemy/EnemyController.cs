@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class EnemyController : MonoBehaviour, Interactable
+public class EnemyController : MonoBehaviour
 {
     // States of enemy
     private enum State
@@ -16,6 +16,8 @@ public class EnemyController : MonoBehaviour, Interactable
     State _state;
     // Variable of type EnemyPath
     EnemyPath _enemyPath;
+    [SerializeField] float waitTime = 5f;
+    int _rnd = 3;
 
     void Awake()
     {
@@ -44,13 +46,14 @@ public class EnemyController : MonoBehaviour, Interactable
         // while the player is roaming do the following
         while (_state == State.Roaming)
         {
+            _rnd = Random.Range(1, 3);
             // Getting the roaming position of th enemy
             // and if enemy path is not null moving the
             // enemy to the new position 
             Vector2 roamPosition = GetRoamingPosition();
-            if(_enemyPath) _enemyPath.MoveTo(roamPosition);
+            if(_enemyPath) _enemyPath.Move(roamPosition);
             // Waiting for 2 seconds to repeat moving player
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(waitTime);
         }
     }
 
@@ -59,6 +62,16 @@ public class EnemyController : MonoBehaviour, Interactable
         // Getting random directions for enemy to move to
         float moveX = Random.Range(-1.0f, 1.0f);
         float moveY = Random.Range(-1.0f, 1.0f);
+        // Switch statement to restrict diagonal movement
+        switch (_rnd)
+        {
+            case 1:
+                moveX = 0;
+                break;
+            case 2:
+                moveY = 0;
+                break;
+        }
         // TODO: Animate enemy based on moveX and moveY
         return new Vector2(moveX, moveY).normalized;
     }
@@ -69,23 +82,6 @@ public class EnemyController : MonoBehaviour, Interactable
         if (other.gameObject.CompareTag("Player"))
         {
             // Calling Interact to show messages
-            Interact();
         }
-    }
-
-    public void Interact()
-    {
-        // Showing Message
-        Debug.Log("Enemy Interact");
-    }
-
-    public void Move()
-    {
-        
-    }
-
-    public void TakeDamage()
-    {
-        
     }
 }
