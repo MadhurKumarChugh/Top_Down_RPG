@@ -397,9 +397,9 @@ MonoBehaviour:
   firePointDown: {fileID: 1308299153}
   firePointRight: {fileID: 1386868533}
   firePointLeft: {fileID: 822601482}
-  spell: {fileID: 4544073637110839239, guid: 83851a1b1248c694ab706e2043303d9e, type: 3}
+  spell: {fileID: 4544073637110839239, guid: d190727ce853b0e4095c7a61cb572e93, type: 3}
   spellDown: {fileID: 4544073637110839239, guid: 8cf70ca9bcd10cc45b0c10f8c1b4fd89, type: 3}
-  spellLeft: {fileID: 4544073637110839239, guid: 83851a1b1248c694ab706e2043303d9e, type: 3}
+  spellLeft: {fileID: 4544073637110839239, guid: d190727ce853b0e4095c7a61cb572e93, type: 3}
   cooldown: 0.3
 --- !u!114 &1237100129
 MonoBehaviour:

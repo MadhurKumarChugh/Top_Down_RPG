@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     PanimationController _animationController;
     // Player Shooting Script component of player 
     PlayerShooting _shooting;
+    bool spellAttack;
     
     void Awake()
     {
@@ -58,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
         _animationController.AnimatePlayer(moveX, moveY);
         _animationController.AttackChecker(moveX, moveY);
         // Calling FirePointer Function of Player Shooting Script
-        _shooting.FirePointer(moveX, moveY);
+        _shooting.FirePointer(moveX, moveY, spellAttack);
         
         
         // Storing the input in movedirection vector
@@ -80,12 +81,14 @@ public class PlayerMovement : MonoBehaviour
     public void Freeze()
     {
         _playerBody.constraints = RigidbodyConstraints2D.FreezeAll;
+        spellAttack = true;
     }
 
     // Function to resume player movement
     public void UnFreeze()
     {
         _playerBody.constraints = RigidbodyConstraints2D.FreezeRotation;
+        spellAttack = false;
     }
 
     

@@ -25,7 +25,7 @@ public class PlayerShooting : MonoBehaviour
     // Point from which the spell will be fired 
     Transform _firePoint;
     // Variable to store which coroutine is running
-    [CanBeNull] Coroutine fire;
+    [CanBeNull] Coroutine _fire;
     PanimationController _anim;
 
     void Awake()
@@ -58,13 +58,14 @@ public class PlayerShooting : MonoBehaviour
         // if space is pressed start firing
         if (Input.GetKeyDown(KeyCode.Space) && !_anim.SwordAtk) FireChecker();
         // otherwise stop firing
-        else if (Input.GetKeyUp(KeyCode.Space) && fire != null) StopCoroutine(fire);
+        else if (Input.GetKeyUp(KeyCode.Space) && _fire != null) StopCoroutine(_fire);
     }
 
     // Function to set the firing point to whatever
     // direction the player is facing
-    public void FirePointer(float xPnt, float yPnt)
+    public void FirePointer(float xPnt, float yPnt, bool spellAtk)
     {
+        if (spellAtk) return;
         if (xPnt.Equals(1)) _firePoint = firePointRight;
         else if (xPnt.Equals(-1)) _firePoint = firePointLeft;
         else if (yPnt.Equals(1)) _firePoint = firePointUp;
@@ -75,9 +76,9 @@ public class PlayerShooting : MonoBehaviour
     // and start firing coroutine accordingly 
     void FireChecker()
     {
-        if (_firePoint == firePointDown) fire = StartCoroutine(FireDown());
-        else if (_firePoint == firePointLeft) fire = StartCoroutine(FireLeft());
-        else fire = StartCoroutine(FireUpAndRight());
+        if (_firePoint == firePointDown) _fire = StartCoroutine(FireDown());
+        else if (_firePoint == firePointLeft) _fire = StartCoroutine(FireLeft());
+        else _fire = StartCoroutine(FireUpAndRight());
     }
 
     // Fire Down Coroutine

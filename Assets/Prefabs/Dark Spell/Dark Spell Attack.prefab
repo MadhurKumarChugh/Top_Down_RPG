@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 4544073637110839235}
   - component: {fileID: 4544073637110839232}
   - component: {fileID: 7137959417444861547}
-  - component: {fileID: 8147338596798368880}
+  - component: {fileID: 3944204952923876845}
   m_Layer: 0
-  m_Name: Dark Spell Attack
+  m_Name: Dark Spell Attack Down
   m_TagString: Spell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 15
+  m_SortingOrder: 20
   m_Sprite: {fileID: 5322389570696283013, guid: d11d6b315e89c4441ae754f542c1e4ce, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -124,7 +124,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.6666666, y: 1.3333334}
+    oldSize: {x: 1.4285715, y: 1.1428572}
     newSize: {x: 1.8181819, y: 1.4545455}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -132,16 +132,16 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.1325724, y: 0.30034542}
-      - {x: -0.20461614, y: 0.30121827}
-      - {x: -0.20733851, y: 0.21164021}
-      - {x: -0.20970398, y: -0.16938895}
-      - {x: -0.20576033, y: -0.3249064}
-      - {x: 0.03294031, y: -0.39447737}
-      - {x: 0.33860788, y: -0.38947126}
-      - {x: 0.38329986, y: -0.31944886}
-      - {x: 0.36711326, y: 0.22778337}
-      - {x: 0.19344273, y: 0.30857357}
+    - - {x: -0.094184145, y: 0.1777674}
+      - {x: -0.09773071, y: 0.17812634}
+      - {x: -0.10432929, y: 0.17243686}
+      - {x: -0.14837891, y: -0.13593894}
+      - {x: -0.084968895, y: -0.21526486}
+      - {x: 0.00989477, y: -0.25049055}
+      - {x: 0.28981003, y: -0.2529243}
+      - {x: 0.31930593, y: -0.24242929}
+      - {x: 0.32209745, y: 0.12620811}
+      - {x: 0.3119463, y: 0.17434952}
 --- !u!114 &7137959417444861547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,7 +156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireForce: 325
   lifeTime: 0.25
---- !u!95 &8147338596798368880
+--- !u!95 &3944204952923876845
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0

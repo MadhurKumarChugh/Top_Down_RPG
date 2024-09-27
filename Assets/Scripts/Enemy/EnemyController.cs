@@ -16,6 +16,7 @@ public class EnemyController : MonoBehaviour
     State _state;
     // Variable of type EnemyPath
     EnemyPath _enemyPath;
+    EAnimationController _animController;
     [SerializeField] float waitTime = 5f;
     int _rnd = 3;
 
@@ -23,6 +24,7 @@ public class EnemyController : MonoBehaviour
     {
         // Getting EnemyPath component of enemy
         _enemyPath = GetComponent<EnemyPath>();
+        _animController = GetComponent<EAnimationController>();
         // Setting the current state to roaming
         _state = State.Roaming;
     }
@@ -72,6 +74,7 @@ public class EnemyController : MonoBehaviour
                 moveY = 0;
                 break;
         }
+        _animController.AnimateEnemy(moveX, moveY,_rnd);
         // TODO: Animate enemy based on moveX and moveY
         return new Vector2(moveX, moveY).normalized;
     }

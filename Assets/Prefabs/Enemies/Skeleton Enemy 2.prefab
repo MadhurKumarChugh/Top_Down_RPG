@@ -12,8 +12,10 @@ GameObject:
   - component: {fileID: 1010741983845770530}
   - component: {fileID: 1010741983845770462}
   - component: {fileID: 1010741983845770463}
+  - component: {fileID: 8779801920760483205}
   - component: {fileID: 1010741983845770461}
   - component: {fileID: 1010741983845770460}
+  - component: {fileID: -2407320176576707712}
   m_Layer: 0
   m_Name: Skeleton Enemy 2
   m_TagString: Enemy
@@ -112,6 +114,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 180
+--- !u!114 &8779801920760483205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1010741983845770529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b14e2fb5f7e2d144fa52dcbccbdad602, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!50 &1010741983845770461
 Rigidbody2D:
   serializedVersion: 4
@@ -168,3 +182,22 @@ PolygonCollider2D:
       - {x: 0.545187, y: 0.22101092}
       - {x: 0.39808702, y: 0.6729537}
       - {x: 0.26708174, y: 0.73714405}
+--- !u!95 &-2407320176576707712
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1010741983845770529}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8a0b19e83dd9ea84391e690e95d82c87, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
