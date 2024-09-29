@@ -10,7 +10,11 @@ public class EAnimationController : MonoBehaviour
         WalkDown,
         WalkUp,
         WalkLeft,
-        WalkRight
+        WalkRight,
+        DownIdle,
+        UpIdle,
+        LeftIdle,
+        RightIdle,
     }
     const string Walk = "WalkDown";
 
@@ -18,6 +22,7 @@ public class EAnimationController : MonoBehaviour
     Animator _enemyAnimator;
     // String to store current animation that is playing
     String _currentState = Walk;
+    int _stt;
     
     void Awake()
     {
@@ -37,12 +42,13 @@ public class EAnimationController : MonoBehaviour
         _currentState = newState;
 
         // Statement to play the animations
-        _enemyAnimator.CrossFade(newState, 0);
+        _enemyAnimator.Play(newState);
     }
     
     // Function to animate enemy based on facing direction 
     public void AnimateEnemy(float x, float y, int state)
     {
+        _stt = state;
         if (state == 1)
         {
             if(y < 0) AnimateStateNormal(State.WalkDown.ToString());
@@ -52,6 +58,13 @@ public class EAnimationController : MonoBehaviour
         {
             if(x < 0) AnimateStateNormal(State.WalkLeft.ToString());
             else AnimateStateNormal(State.WalkRight.ToString());
+        }
+        else if (state == 3)
+        {
+            if(_currentState == State.WalkDown.ToString()) AnimateStateNormal(State.DownIdle.ToString());
+            else if (_currentState == State.WalkUp.ToString()) AnimateStateNormal(State.UpIdle.ToString());
+            else if (_currentState == State.WalkLeft.ToString()) AnimateStateNormal(State.LeftIdle.ToString());
+            else if (_currentState == State.WalkRight.ToString()) AnimateStateNormal(State.RightIdle.ToString());
         }
     }
 

@@ -14,11 +14,14 @@ public class EnemyController : MonoBehaviour
 
     // Variable of type State enum
     State _state;
+
     // Variable of type EnemyPath
     EnemyPath _enemyPath;
     EAnimationController _animController;
     [SerializeField] float waitTime = 5f;
     int _rnd = 3;
+    float _moveX;
+    float _moveY;
 
     void Awake()
     {
@@ -39,7 +42,6 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     // Coroutine to handle enemy movement/roaming state
@@ -48,12 +50,12 @@ public class EnemyController : MonoBehaviour
         // while the player is roaming do the following
         while (_state == State.Roaming)
         {
-            _rnd = Random.Range(1, 3);
+            _rnd = Random.Range(1, 4);
             // Getting the roaming position of th enemy
             // and if enemy path is not null moving the
             // enemy to the new position 
             Vector2 roamPosition = GetRoamingPosition();
-            if(_enemyPath) _enemyPath.Move(roamPosition);
+            if (_enemyPath) _enemyPath.Move(roamPosition);
             // Waiting for 2 seconds to repeat moving player
             yield return new WaitForSeconds(waitTime);
         }
@@ -62,29 +64,17 @@ public class EnemyController : MonoBehaviour
     Vector2 GetRoamingPosition()
     {
         // Getting random directions for enemy to move to
-        float moveX = Random.Range(-1.0f, 1.0f);
-        float moveY = Random.Range(-1.0f, 1.0f);
+        _moveX = Random.Range(-1.0f, 1.0f);
+        _moveY = Random.Range(-1.0f, 1.0f);
         // Switch statement to restrict diagonal movement
-        switch (_rnd)
+        if (_rnd == 1) _moveX = 0;
+        else if (_rnd == 2) _moveY = 0;
+        else if (_rnd == 3)
         {
-            case 1:
-                moveX = 0;
-                break;
-            case 2:
-                moveY = 0;
-                break;
+            _moveX = 0;
+            _moveY = 0;
         }
-        _animController.AnimateEnemy(moveX, moveY,_rnd);
-        // TODO: Animate enemy based on moveX and moveY
-        return new Vector2(moveX, moveY).normalized;
-    }
-
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        // Checking if Enemy has contacted player or not
-        if (other.gameObject.CompareTag("Player"))
-        {
-            // Calling Interact to show messages
-        }
+        if(_animController) _animController.AnimateEnemy(_moveX, _moveY, _rnd);
+        return new Vector2(_moveX, _moveY).normalized;
     }
 }
