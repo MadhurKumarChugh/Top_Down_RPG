@@ -73,6 +73,7 @@ public class EnemyController : MonoBehaviour
         {
             _moveX = 0;
             _moveY = 0;
+           if(_enemyPath) _enemyPath.Stop();
         }
         if(_animController) _animController.AnimateEnemy(_moveX, _moveY, _rnd);
         return new Vector2(_moveX, _moveY).normalized;

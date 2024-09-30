@@ -43,6 +43,11 @@ public class EnemyPath : MonoBehaviour, Interactable
         _moveDir = targetDir;
     }
 
+    public void Stop()
+    {
+        _enemybody.velocity = Vector2.zero;
+    }
+
     public void Interact()
     {
         throw new NotImplementedException();
