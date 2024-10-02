@@ -255,7 +255,7 @@ public class PanimationController : MonoBehaviour
     void SwordAttack(float xd, float yd)
     {
         // Play animation at right click
-        if (Input.GetMouseButtonDown(1) && !_swordColl.swordCollider.activeInHierarchy)
+        if (Input.GetMouseButtonDown(0) && !_swordColl.swordCollider.activeInHierarchy)
         {
             // Player movement is stopped while attacking
             _playerMovement.Freeze();
@@ -299,7 +299,7 @@ public class PanimationController : MonoBehaviour
                 {AnimateStateSword(State.sword_attack_right.ToString()); _swordColl.RotateRight();}
             }
         }
-        else if (Input.GetMouseButtonUp(1) && _swordColl.swordCollider.activeInHierarchy)
+        else if (Input.GetMouseButtonUp(0) && _swordColl.swordCollider.activeInHierarchy)
         {
             // Player movement resumes while not attacking
             _playerMovement.UnFreeze();

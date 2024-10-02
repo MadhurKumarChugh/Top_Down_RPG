@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : MonoBehaviour, Interactable
 {
     // States of enemy
     private enum State
@@ -22,6 +22,11 @@ public class EnemyController : MonoBehaviour
     int _rnd = 3;
     float _moveX;
     float _moveY;
+    
+    [Header("ENEMY Health")]
+    [SerializeField] float startingHealth = 3f;
+    float _currentHealth;
+    
 
     void Awake()
     {
@@ -37,6 +42,7 @@ public class EnemyController : MonoBehaviour
     {
         // Starting the Roaming Coroutine
         StartCoroutine(Roaming());
+        _currentHealth = startingHealth;
     }
 
     // Update is called once per frame
@@ -75,7 +81,35 @@ public class EnemyController : MonoBehaviour
             _moveY = 0;
            if(_enemyPath) _enemyPath.Stop();
         }
-        if(_animController) _animController.AnimateEnemy(_moveX, _moveY, _rnd);
+
+        if (_animController)
+        {
+            _animController.GetVectors(_moveX, _moveY);
+            _animController.AnimateEnemy(_rnd);
+        }
         return new Vector2(_moveX, _moveY).normalized;
+    }
+
+    // private void OnCollisionEnter2D(Collision2D other)
+    // {
+    //     _rnd = 3;
+    //     _animController.AnimateEnemy(_rnd);
+    // }
+    //
+    // private void OnCollisionStay2D(Collision2D other)
+    // {
+    //     _rnd = 3;
+    //     _animController.AnimateEnemy(_rnd);
+    // }
+
+    public void Interact()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void TakeDamage(float damage)
+    {
+        _currentHealth -= damage;
+        if(_currentHealth <= 0) Destroy(gameObject);
     }
 }

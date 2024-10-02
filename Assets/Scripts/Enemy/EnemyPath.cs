@@ -2,8 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class EnemyPath : MonoBehaviour, Interactable
+public class EnemyPath : MonoBehaviour
 {
     [Header("ENEMY MOVEMENT")]
     [SerializeField] float movementSpeed = 2f;
@@ -11,11 +12,13 @@ public class EnemyPath : MonoBehaviour, Interactable
     Rigidbody2D _enemybody;
     // Vector to hold movement direction of enemy
     Vector2 _moveDir;
+    EnemyController _controller;
 
     void Awake()
     {
         // Getting Rigidbody component of enemy
         _enemybody = GetComponent<Rigidbody2D>();
+        _controller = GetComponent<EnemyController>();
     }
 
     // Start is called before the first frame update
@@ -47,14 +50,5 @@ public class EnemyPath : MonoBehaviour, Interactable
     {
         _enemybody.velocity = Vector2.zero;
     }
-
-    public void Interact()
-    {
-        throw new NotImplementedException();
-    }
-
-    public void TakeDamage()
-    {
-        throw new NotImplementedException();
-    }
+    
 }

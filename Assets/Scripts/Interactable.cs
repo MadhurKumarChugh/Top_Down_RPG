@@ -5,6 +5,5 @@ using UnityEngine;
 public interface Interactable
 {
     void Interact();
-    void Move(Vector2 targetDir);
-    void TakeDamage();
+    void TakeDamage(float damage);
 }

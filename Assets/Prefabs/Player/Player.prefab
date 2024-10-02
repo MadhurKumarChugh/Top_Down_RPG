@@ -195,6 +195,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1510343983}
   - component: {fileID: 1510343984}
+  - component: {fileID: 8737338587956681066}
   m_Layer: 0
   m_Name: Sword Collider
   m_TagString: Untagged
@@ -242,6 +243,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8591535, y: 0.43408707}
   m_EdgeRadius: 0
+--- !u!114 &8737338587956681066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510343982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a29d24da4b56ed48922d85f2c799b10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6079601594445964097
 GameObject:
   m_ObjectHideFlags: 0

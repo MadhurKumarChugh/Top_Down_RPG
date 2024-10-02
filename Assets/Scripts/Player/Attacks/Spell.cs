@@ -9,6 +9,8 @@ public class Spell : MonoBehaviour
     Animator _spellAnim;
     [SerializeField] float fireForce = 20f;
     [SerializeField] float lifeTime = 1f;
+    
+    [SerializeField] float spellDamage = 1f;
 
     void Awake()
     {
@@ -24,13 +26,18 @@ public class Spell : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        // If collided with player then
+        // If not collided with player then
         if (!other.gameObject.CompareTag("Player"))
         {
             // Play dark spell hit animation and
             // destroy object after certain life-time
             _spellAnim.Play("Dark Hit");
             Destroy(gameObject, lifeTime);
+            if (other.gameObject.CompareTag("Enemy"))
+            {
+                var path = other.gameObject.GetComponent<EnemyController>();
+                path.TakeDamage(spellDamage);
+            }
         }
         // else if collided with another spell object
         else if (other.gameObject.CompareTag("Spell"))
