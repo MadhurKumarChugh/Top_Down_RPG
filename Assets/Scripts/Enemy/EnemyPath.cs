@@ -12,13 +12,11 @@ public class EnemyPath : MonoBehaviour
     Rigidbody2D _enemybody;
     // Vector to hold movement direction of enemy
     Vector2 _moveDir;
-    EnemyController _controller;
 
     void Awake()
     {
         // Getting Rigidbody component of enemy
         _enemybody = GetComponent<Rigidbody2D>();
-        _controller = GetComponent<EnemyController>();
     }
 
     // Start is called before the first frame update
@@ -36,7 +34,7 @@ public class EnemyPath : MonoBehaviour
     void FixedUpdate()
     {
         // Moving enemy using velocity
-        _enemybody.velocity = _moveDir * (movementSpeed * Time.fixedDeltaTime);
+        _enemybody.MovePosition(_enemybody.position + _moveDir * (movementSpeed * Time.fixedDeltaTime));
     }
 
     // Target Position
@@ -48,7 +46,7 @@ public class EnemyPath : MonoBehaviour
 
     public void Stop()
     {
-        _enemybody.velocity = Vector2.zero;
+        _enemybody.MovePosition(Vector2.zero);
     }
     
 }

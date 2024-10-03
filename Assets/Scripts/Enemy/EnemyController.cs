@@ -22,11 +22,12 @@ public class EnemyController : MonoBehaviour, Interactable
     int _rnd = 3;
     float _moveX;
     float _moveY;
-    
-    [Header("ENEMY Health")]
-    [SerializeField] float startingHealth = 3f;
+
+    [Header("ENEMY Health")] [SerializeField]
+    float startingHealth = 3f;
+
     float _currentHealth;
-    
+
 
     void Awake()
     {
@@ -79,7 +80,7 @@ public class EnemyController : MonoBehaviour, Interactable
         {
             _moveX = 0;
             _moveY = 0;
-           if(_enemyPath) _enemyPath.Stop();
+            if (_enemyPath) _enemyPath.Stop();
         }
 
         if (_animController)
@@ -87,14 +88,19 @@ public class EnemyController : MonoBehaviour, Interactable
             _animController.GetVectors(_moveX, _moveY);
             _animController.AnimateEnemy(_rnd);
         }
+
         return new Vector2(_moveX, _moveY).normalized;
     }
 
-    // private void OnCollisionEnter2D(Collision2D other)
-    // {
-    //     _rnd = 3;
-    //     _animController.AnimateEnemy(_rnd);
-    // }
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            _rnd = 3;
+            _enemyPath.Stop();
+            _animController.AnimateEnemy(_rnd);
+        }
+    }
     //
     // private void OnCollisionStay2D(Collision2D other)
     // {
@@ -110,6 +116,6 @@ public class EnemyController : MonoBehaviour, Interactable
     public void TakeDamage(float damage)
     {
         _currentHealth -= damage;
-        if(_currentHealth <= 0) Destroy(gameObject);
+        if (_currentHealth <= 0) Destroy(gameObject);
     }
 }
