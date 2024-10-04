@@ -9,7 +9,8 @@ public class EnemyController : MonoBehaviour, Interactable
     // States of enemy
     private enum State
     {
-        Roaming
+        Roaming,
+        Chasing
     }
 
     // Variable of type State enum
@@ -23,8 +24,8 @@ public class EnemyController : MonoBehaviour, Interactable
     float _moveX;
     float _moveY;
 
-    [Header("ENEMY Health")] [SerializeField]
-    float startingHealth = 3f;
+    [Header("ENEMY Health")] 
+    [SerializeField] float startingHealth = 3f;
 
     float _currentHealth;
 
@@ -49,6 +50,18 @@ public class EnemyController : MonoBehaviour, Interactable
     // Update is called once per frame
     void Update()
     {
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        StopCoroutine(Roaming());
+        if(_enemyPath) _enemyPath.IsChasing = true;
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        StartCoroutine(Roaming());
+        if(_enemyPath) _enemyPath.IsChasing = false;
     }
 
     // Coroutine to handle enemy movement/roaming state
@@ -92,15 +105,15 @@ public class EnemyController : MonoBehaviour, Interactable
         return new Vector2(_moveX, _moveY).normalized;
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            _rnd = 3;
-            _enemyPath.Stop();
-            _animController.AnimateEnemy(_rnd);
-        }
-    }
+    // private void OnCollisionEnter2D(Collision2D other)
+    // {
+    //     if (other.gameObject.CompareTag("Enemy"))
+    //     {
+    //         _rnd = 3;
+    //         _enemyPath.Stop();
+    //         _animController.AnimateEnemy(_rnd);
+    //     }
+    // }
     //
     // private void OnCollisionStay2D(Collision2D other)
     // {

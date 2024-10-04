@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waitTime: 3.5
+  startingHealth: 3
 --- !u!114 &2226466930712922779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,7 +114,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d755803b071950747bcfe8589d562b6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 180
+  movementSpeed: 5
+  followSpeed: 4
 --- !u!114 &704660388348273358
 MonoBehaviour:
   m_ObjectHideFlags: 0

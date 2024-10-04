@@ -7993,10 +7993,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1010741983845770463, guid: 189a4a8482d2d3d4cbe581e443d61704, type: 3}
-      propertyPath: movementSpeed
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 1010741983845770529, guid: 189a4a8482d2d3d4cbe581e443d61704, type: 3}
       propertyPath: m_Name
       value: Skeleton Enemy 2
@@ -8406,10 +8402,6 @@ PrefabInstance:
     - target: {fileID: 2226466930712922778, guid: 8e9e446e3a4e50147a98b13fd004da61, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2226466930712922779, guid: 8e9e446e3a4e50147a98b13fd004da61, type: 3}
-      propertyPath: movementSpeed
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2226466930712922780, guid: 8e9e446e3a4e50147a98b13fd004da61, type: 3}
       propertyPath: m_Name

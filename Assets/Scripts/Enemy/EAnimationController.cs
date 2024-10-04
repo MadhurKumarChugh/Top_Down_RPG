@@ -24,8 +24,8 @@ public class EAnimationController : MonoBehaviour
 
     // String to store current animation that is playing
     String _currentState = Walk;
-    private float movX;
-    private float movY;
+    private float _movX;
+    private float _movY;
 
     void Awake()
     {
@@ -53,12 +53,12 @@ public class EAnimationController : MonoBehaviour
     {
         if (state == 1)
         {
-            if (movY < 0)
+            if (_movY < 0)
             {
                 AnimateStateNormal(State.WalkDown.ToString());
              
             }
-            else if (movY > 0)
+            else if (_movY > 0)
             {
                 AnimateStateNormal(State.WalkUp.ToString());
            
@@ -66,12 +66,12 @@ public class EAnimationController : MonoBehaviour
         }
         else if (state == 2)
         {
-            if (movX < 0)
+            if (_movX < 0)
             {
                 AnimateStateNormal(State.WalkLeft.ToString());
              
             }
-            else if (movX > 0)
+            else if (_movX > 0)
             {
                 AnimateStateNormal(State.WalkRight.ToString());
               
@@ -118,7 +118,7 @@ public class EAnimationController : MonoBehaviour
 
     public void GetVectors(float x, float y)
     {
-        movX = x;
-        movY = y;
+        _movX = x;
+        _movY = y;
     }
 }
