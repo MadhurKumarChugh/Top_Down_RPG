@@ -15,13 +15,20 @@ public class EnemyPath : MonoBehaviour
     // Vector to hold movement direction of enemy
     Vector2 _moveDir;
     Transform _player;
+    EAnimationController _anim;
     bool _isChasing;
-    public bool IsChasing {set => _isChasing=value; }
+
+    public bool IsChasing
+    {
+        get => _isChasing;
+        set => _isChasing=value;
+    }
 
     void Awake()
     {
         // Getting Rigidbody component of enemy
         _enemybody = GetComponent<Rigidbody2D>();
+        _anim = GetComponent<EAnimationController>();
     }
 
     // Start is called before the first frame update
@@ -70,5 +77,11 @@ public class EnemyPath : MonoBehaviour
         _enemybody.position =
             Vector2.MoveTowards(_enemybody.position, _player.position, 
                 followSpeed * Time.fixedDeltaTime);
+    }
+
+    public void ChangeAnimation()
+    {
+        var diff = _player.position.x - transform.position.x;
+        _anim.AnimateChase(diff);
     }
 }

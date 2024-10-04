@@ -7,29 +7,26 @@ public class EAnimationController : MonoBehaviour
 {
     private enum State
     {
-        WalkDown,
-        WalkUp,
         WalkLeft,
         WalkRight,
-        DownIdle,
-        UpIdle,
         LeftIdle,
-        RightIdle,
+        RightIdle
     }
 
-    const string Walk = "WalkDown";
+    const string Walk = "WalkLeft";
 
     // Animator to control player animation by code
     Animator _enemyAnimator;
+    EnemyPath _path;
 
     // String to store current animation that is playing
     String _currentState = Walk;
     private float _movX;
-    private float _movY;
 
     void Awake()
     {
         _enemyAnimator = GetComponent<Animator>();
+        _path = GetComponent<EnemyPath>();
     }
 
     // Function to store the logic of which animation to play
@@ -51,33 +48,21 @@ public class EAnimationController : MonoBehaviour
     // Function to animate enemy based on facing direction 
     public void AnimateEnemy(int state)
     {
-        if (state == 1)
+        if(_path.IsChasing) return;
+        if (state == 0)
         {
-            if (_movY < 0)
-            {
-                AnimateStateNormal(State.WalkDown.ToString());
-             
-            }
-            else if (_movY > 0)
-            {
-                AnimateStateNormal(State.WalkUp.ToString());
-           
-            }
-        }
-        else if (state == 2)
-        {
-            if (_movX < 0)
+            if (_movX <= 0)
             {
                 AnimateStateNormal(State.WalkLeft.ToString());
              
             }
-            else if (_movX > 0)
+            else if (_movX >= 0)
             {
                 AnimateStateNormal(State.WalkRight.ToString());
               
             }
         }
-        else if (state == 3)
+        else
         {
             AnimateIdle();
         }
@@ -86,17 +71,7 @@ public class EAnimationController : MonoBehaviour
 
     void AnimateIdle()
     {
-        if (_currentState == State.WalkDown.ToString())
-        {
-            AnimateStateNormal(State.DownIdle.ToString());
-            
-        }
-        else if (_currentState == State.WalkUp.ToString())
-        {
-            AnimateStateNormal(State.UpIdle.ToString());
-          
-        }
-        else if (_currentState == State.WalkLeft.ToString())
+        if (_currentState == State.WalkLeft.ToString())
         {
             AnimateStateNormal(State.LeftIdle.ToString());
             
@@ -104,6 +79,18 @@ public class EAnimationController : MonoBehaviour
         else if (_currentState == State.WalkRight.ToString())
         {
             AnimateStateNormal(State.RightIdle.ToString());
+        }
+    }
+
+    public void AnimateChase(float x)
+    {
+        if (x <= 0)
+        {
+            AnimateStateNormal(State.WalkLeft.ToString());
+        }
+        else if (x >= 0)
+        {
+            AnimateStateNormal(State.WalkRight.ToString());
         }
     }
 
@@ -116,9 +103,8 @@ public class EAnimationController : MonoBehaviour
     {
     }
 
-    public void GetVectors(float x, float y)
+    public void GetVectors(float x)
     {
         _movX = x;
-        _movY = y;
     }
 }

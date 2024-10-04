@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 5
-  followSpeed: 4
+  followSpeed: 3.5
 --- !u!114 &8779801920760483205
 MonoBehaviour:
   m_ObjectHideFlags: 0

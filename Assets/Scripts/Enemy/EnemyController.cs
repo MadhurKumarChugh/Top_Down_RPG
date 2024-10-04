@@ -20,7 +20,7 @@ public class EnemyController : MonoBehaviour, Interactable
     EnemyPath _enemyPath;
     EAnimationController _animController;
     [SerializeField] float waitTime = 5f;
-    int _rnd = 3;
+    int _rnd;
     float _moveX;
     float _moveY;
 
@@ -55,7 +55,7 @@ public class EnemyController : MonoBehaviour, Interactable
     private void OnTriggerEnter2D(Collider2D other)
     {
         StopCoroutine(Roaming());
-        if(_enemyPath) _enemyPath.IsChasing = true;
+        if(_enemyPath) {_enemyPath.IsChasing = true; _enemyPath.ChangeAnimation();}
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -70,7 +70,7 @@ public class EnemyController : MonoBehaviour, Interactable
         // while the player is roaming do the following
         while (_state == State.Roaming)
         {
-            _rnd = Random.Range(1, 4);
+            _rnd = Random.Range(0, 2);
             // Getting the roaming position of th enemy
             // and if enemy path is not null moving the
             // enemy to the new position 
@@ -87,9 +87,7 @@ public class EnemyController : MonoBehaviour, Interactable
         _moveX = Random.Range(-1.0f, 1.0f);
         _moveY = Random.Range(-1.0f, 1.0f);
         // Switch statement to restrict diagonal movement
-        if (_rnd == 1) _moveX = 0;
-        else if (_rnd == 2) _moveY = 0;
-        else if (_rnd == 3)
+        if (_rnd == 1)
         {
             _moveX = 0;
             _moveY = 0;
@@ -98,7 +96,7 @@ public class EnemyController : MonoBehaviour, Interactable
 
         if (_animController)
         {
-            _animController.GetVectors(_moveX, _moveY);
+            _animController.GetVectors(_moveX);
             _animController.AnimateEnemy(_rnd);
         }
 
